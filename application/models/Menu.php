@@ -23,7 +23,7 @@ class Menu extends CI_Model {
         }
 
         // build a full list of patties - approach 2
-        foreach ($this->$xml->patties->patty as $patty) {
+        foreach ($this->xml->patties->patty as $patty) {
             $record = new stdClass();
             $record->code = (string) $patty['code'];
             $record->name = (string) $patty;
