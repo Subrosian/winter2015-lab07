@@ -21,7 +21,6 @@ class Order extends CI_Model {
     }
     
     //Load an order with the corresponding filename
-    //Upd (3/25/15, 1:22PM): TBD: Finish this later - correctly doing the foreach loop in here and in curr_order, <<doing correct SimpleXML access><YKWIM>>. Note the start time was in my BB "More TBD Pg. #12" memo.
     function load_order($filename) {
         $this->filename = $filename;
         $this->xml = simplexml_load_file(DATAPATH . $filename);
@@ -32,21 +31,6 @@ class Order extends CI_Model {
         foreach($this->xml->burger as $burger) { //Note: the root XML element apparently is not a stdClass element
             $this->burgers[] = $burger;
         }
-        
-        /*
-        // build the list of patties - approach 1
-        foreach ($this->xml->patties->patty as $patty) {
-            $this->$patty_names[(string) $patty['code']] = (string) $patty;
-        }
-
-        // build a full list of patties - approach 2
-        foreach ($this->$xml->patties->patty as $patty) {
-            $record = new stdClass();
-            $record->code = (string) $patty['code'];
-            $record->name = (string) $patty;
-            $record->price = (float) $patty['price'];
-            $this->$patties[$record->code] = $record;
-        }*/
     }
 
     //return the order, as an associative array for use as view parameters in the receipt (to be merged with $this->data of any respective controllers)
@@ -125,19 +109,5 @@ class Order extends CI_Model {
         
         return $curr_order;
     }
-    
-    /*
-    // retrieve a list of patties, to populate a dropdown, for instance
-    function patties() {
-        return $this->patty_names;
-    }
-
-    // retrieve a patty record, perhaps for pricing
-    function getPatty($code) {
-        if (isset($this->patties[$code]))
-            return $this->patties[$code];
-        else
-            return null;
-    }*/
 
 }

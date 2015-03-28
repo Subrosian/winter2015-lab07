@@ -29,7 +29,8 @@ class Welcome extends Application {
 	// Build a list of orders
         
         $map = directory_map('./data/', 1);
-        $xmlmap = array();
+        $xmlmap = array(); //view parameters for the xml orders
+        
         foreach($map as $file) { //Filter out the .xml files, and the menu.xml file
             if($this->endsWith($file, ".xml") && substr($file, 0, strlen($file)-4) != "menu") {
                 $filename = substr($file, 0, strlen($file)-4);
@@ -52,10 +53,10 @@ class Welcome extends Application {
     {
         $this->order->load_order($filename.".xml");
         
+        // Build a receipt for the chosen order, retrieving all info from the model
+        // All of the view parameter information is stored in curr_order()
         $this->data = array_merge($this->data, $this->order->curr_order()); //accessing the order property
             //access the contents of $elem as (string)$elem, and attributes as $elem[attr]
-        
-        // Build a receipt for the chosen order, retrieving all info from the model
         
         
 	// Present the list to choose from
