@@ -30,10 +30,11 @@ class Welcome extends Application {
         
         $map = directory_map('./data/', 1);
         $xmlmap = array();
-        foreach($map as $file) { //Filter out the .xml files
-            if($this->endsWith($file, ".xml")) {
+        foreach($map as $file) { //Filter out the .xml files, and the menu.xml file
+            if($this->endsWith($file, ".xml") && substr($file, 0, strlen($file)-4) != "menu") {
                 $filename = substr($file, 0, strlen($file)-4);
-                $xmlmap[] = array('filename' => $filename);
+                $customer = simplexml_load_file(DATAPATH . $filename.".xml")->customer;
+                $xmlmap[] = array('filename' => $filename, 'customer' => $customer);
             }
         }
         $this->data['orders'] = $xmlmap;

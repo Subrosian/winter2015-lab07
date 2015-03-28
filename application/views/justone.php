@@ -4,7 +4,9 @@
     {burgers}<br>
     *Burger #{burgernum}*<br>
     Base: {pattytype} burger<br>
-    Cheese: {cheeses}<br>
-    Toppings: seasonal {toppings}<br>
-    Sauces: {sauces}
-    {/burgers}<br><br>
+    {cheeses}
+    Toppings: {toppings}<br>
+    Sauces: {sauces}<br>
+    Burger total: {burgertotal}<br>
+    {/burgers}<br>
+    Order TOTAL: {ordertotal}<br><br>
